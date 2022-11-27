@@ -7,8 +7,8 @@ Small project for Kraisoft Job Application.
 Use the package node manager [npm](https://nodejs.org/en/download/) to install foobar.
 
 ```bash
-node install
-node run build
+npm install
+npm run build
 ```
 ## About
 Made with webpack and typescript. Run the build and open `public/index.html`
