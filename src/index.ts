@@ -2,6 +2,7 @@ let parentDiv = document.getElementById("parent");
 let draggableObject = document.getElementById("draggable");
 
 draggableObject.addEventListener('mousedown', onMouseDown);
+draggableObject.addEventListener('touchmove', onTouchMove);
 
 const draggableObjectSize = 50;
 
@@ -73,8 +74,26 @@ function onMouseMove(event: any) {
     event.target.addEventListener('mouseleave', cleanUpListeners);
 }
 
+function onTouchMove(event: any) {
+    var touchLocation = event.targetTouches[0];
+    let newXPosition = touchLocation.pageX;
+    let newYPosition = touchLocation.pageY;
+
+    if (newXPosition + draggableObjectSize < rightBound && newXPosition > leftBound) {
+        event.target.style.left = (newXPosition + 'px');
+        draggablePositionX = newXPosition;
+    }
+    if (newYPosition + draggableObjectSize < lowerBound && newYPosition > topBound) {
+        event.target.style.top = (newYPosition + 'px');
+        draggablePositionY = newYPosition;
+    }
+
+    event.target.addEventListener('touchend', cleanUpListeners);
+}
+
 function cleanUpListeners(event: any) {
     document.removeEventListener('mousemove', onMouseMove);
     event.target.removeEventListener('mouseup', onMouseMove);
     event.target.removeEventListener('mouseleave', onMouseMove);
+    event.target.addEventListener('touchend', onTouchMove);
 }

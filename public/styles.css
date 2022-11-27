@@ -18,4 +18,5 @@ body {
     height: 50px;
     min-height: 50px;
     background-color: forestgreen;
+    position: absolute;
 }
